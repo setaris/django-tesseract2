@@ -1,36 +1,24 @@
-*.py[cod]
+# Python bytecode:
+*.py[co]
 
-# C extensions
-*.so
+# Packaging files:
+*.egg*
 
-# Packages
-*.egg
-*.egg-info
-dist
+# Editor temp files:
+*.swp
+*~
+
+# Sphinx docs:
 build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
-lib
-lib64
-__pycache__
 
-# Installer logs
-pip-log.txt
+# SQLite3 database files:
+*.db
 
-# Unit test / coverage reports
-.coverage
-.tox
-nosetests.xml
+# Logs:
+*.log
 
-# Translations
-*.mo
+# Media dia
+media/
 
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
+# Permission file
+*.pem
