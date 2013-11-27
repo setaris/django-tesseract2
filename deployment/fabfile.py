@@ -63,7 +63,7 @@ def setup():
     run("mkdir -p %(root)s" % env)
     sudo("aptitude update")
     sudo("aptitude -y install git-core python-dev python-setuptools "
-        "build-essential subversion mercurial nginx"
+        "build-essential subversion mercurial nginx "
         "libjpeg62 libjpeg62-dev zlib1g-dev libfreetype6 libfreetype6-dev "
         "ghostscript imagemagick "
         "tesseract-ocr libtesseract-dev")
@@ -73,7 +73,6 @@ def setup():
     run("%(virtualenv)s/bin/pip install -U pip" % env)
 
     with cd("~/webapps/"):
-        run("git clone %(repo_url)s" % env)
+        run("git clone %(repo_url)s djangotesseract2" % env)
 
-    sudo("nginx")
     deploy()
