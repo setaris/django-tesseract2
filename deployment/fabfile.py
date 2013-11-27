@@ -52,6 +52,11 @@ def syncdb():
         run("%(virtualenv)s/bin/python manage.py syncdb --noinput --settings=djangotesseract2.settings.production" % env)
 
 
+def collectstatic():
+    with cd("%(project)s" % env):
+        run("%(virtualenv)s/bin/python manage.py collectstatic --settings=djangotesseract2.settings.production" % env)
+
+
 def reload():
     with settings(warn_only=True):
         sudo("sudo initctl stop djangotesseract2")
@@ -74,5 +79,9 @@ def setup():
 
     with cd("~/webapps/"):
         run("git clone %(repo_url)s djangotesseract2" % env)
+
+    with cd("%(project)s" % env):
+        run('mkdir assets')
+        run('mkdir media')
 
     deploy()
