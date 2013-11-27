@@ -11,5 +11,4 @@ def handle_uploaded_file(f):
         for chunk in f.chunks():
             destination.write(chunk)
 
-    print "$$$$$$$$$$$$", unique_id
     return unique_id
