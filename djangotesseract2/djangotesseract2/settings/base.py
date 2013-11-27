@@ -120,7 +120,7 @@ ALLOWED_HOSTS = []
 ########## TEMPLATE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
 TEMPLATE_CONTEXT_PROCESSORS = (
-    #'django.contrib.auth.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     #'django.core.context_processors.debug',
     #'django.core.context_processors.i18n',
     #'django.core.context_processors.media',
@@ -149,6 +149,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -165,10 +166,13 @@ DJANGO_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
+    'django.contrib.admin'
 )
 
 THIRD_PARTY_APPS = (
     'rest_framework',
+    'rest_framework.authtoken'
 )
 
 LOCAL_APPS = (
@@ -217,3 +221,10 @@ LOGGING = {
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 ########## END WSGI CONFIGURATION
+
+########## REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.OAuth2Authentication',
+    )
+}
