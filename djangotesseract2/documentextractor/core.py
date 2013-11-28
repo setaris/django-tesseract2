@@ -6,6 +6,9 @@ from PyPDF2 import PdfFileReader
 from wand.image import Image as WandImage
 from tesserwrap import Tesseract
 
+from .settings import IMAGE_RESOLUTION
+from .settings import COMPRESSION_QUALITY
+
 
 class DocumentExtractor(object):
     def __init__(self, filename, config=None):
@@ -15,8 +18,8 @@ class DocumentExtractor(object):
         self.path = filename
         self.file = PdfFileReader(fileobj)
         self.config = {
-            'wand_resolution': 200,
-            'wand_compression_quality': 70
+            'wand_resolution': IMAGE_RESOLUTION,
+            'wand_compression_quality': COMPRESSION_QUALITY
         }
 
         if config:
