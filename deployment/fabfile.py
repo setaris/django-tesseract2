@@ -1,10 +1,21 @@
+import os
+
 from fabric.api import env, run, cd, sudo, settings
 from fabric.contrib.files import upload_template
 
 
+def get_env_variable(var_name):
+    """ Get the environment variable or return exception """
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Variable %s is not set in the environment" % var_name
+        raise Exception(error_msg)
+
+
 env.user = "ubuntu"
-env.hosts = ['ec2-54-211-49-231.compute-1.amazonaws.com']
-env.key_filename = ["demo.pem"]
+env.hosts = [get_env_variable('TESSERACT_HOST')]
+env.key_filename = [get_env_variable('TESSERACT_AWS_KEYFILE')]
 env.repo_url = 'git@github.com:setaris/django-tesseract2.git'
 
 env.root = "/home/ubuntu/webapps/djangotesseract2"
