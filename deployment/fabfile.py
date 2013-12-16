@@ -14,9 +14,9 @@ def get_env_variable(var_name):
 
 
 env.user = "ubuntu"
-env.hosts = [get_env_variable('TESSERACT_HOST')]
-env.key_filename = [get_env_variable('TESSERACT_AWS_KEYFILE')]
-env.repo_url = 'git@github.com:setaris/django-tesseract2.git'
+#env.hosts = [get_env_variable('TESSERACT_HOST')]
+#env.key_filename = [get_env_variable('TESSERACT_AWS_KEYFILE')]
+env.repo_url = 'https://github.com/setaris/django-tesseract2.git'
 
 env.root = "/home/ubuntu/webapps/djangotesseract2"
 env.virtualenv = "/home/ubuntu/envs/djangotesseract2env"
@@ -55,17 +55,17 @@ def update_dependencies():
 
 def createsuperuser():
     with cd("%(project)s" % env):
-        run("%(virtualenv)s/bin/python manage.py createsuperuser --settings=djangotesseract2.settings.production" % env)
+        run("%(virtualenv)s/bin/python manage.py createsuperuser --settings=settings.production" % env)
 
 
 def syncdb():
     with cd("%(project)s" % env):
-        run("%(virtualenv)s/bin/python manage.py syncdb --noinput --settings=djangotesseract2.settings.production" % env)
+        run("%(virtualenv)s/bin/python manage.py syncdb --noinput --settings=settings.production" % env)
 
 
 def collectstatic():
     with cd("%(project)s" % env):
-        run("%(virtualenv)s/bin/python manage.py collectstatic --settings=djangotesseract2.settings.production" % env)
+        run("%(virtualenv)s/bin/python manage.py collectstatic --settings=settings.production" % env)
 
 
 def reload():
