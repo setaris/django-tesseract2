@@ -94,5 +94,6 @@ def setup():
     with cd("%(project)s" % env):
         run('mkdir assets')
         run('mkdir media')
+        run('mkdir static')
 
     deploy()
