@@ -4,7 +4,6 @@ from tempfile import NamedTemporaryFile
 from PIL import Image
 from PyPDF2 import PdfFileReader
 from wand.image import Image as WandImage
-from tesserwrap import Tesseract
 
 from .settings import IMAGE_RESOLUTION
 from .settings import COMPRESSION_QUALITY
@@ -63,8 +62,13 @@ class DocumentExtractor(object):
             img = Image.open(temp.name)
 
             # Run tesseract
-            tr = Tesseract()
-            result = tr.ocr_image(img)
+            try:
+                from tesserwrap import Tesseract
+                tr = Tesseract()
+                result = tr.ocr_image(img)
+            except ImportError:
+                result = 'OCR not available. ' \
+                         'Please make sure that Tesseract is installed.\n'
 
             temp.close()
 
