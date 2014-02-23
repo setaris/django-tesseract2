@@ -22,3 +22,6 @@ media/
 
 # Permission file
 *.pem
+
+# IDE files
+.idea/
