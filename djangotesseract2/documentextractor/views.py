@@ -9,32 +9,14 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser
 from rest_framework.parsers import FormParser
 from rest_framework.pagination import PaginationSerializer
-import requests
+
 
 from documentextractor.serializers import DocumentSerializer
 
 from .core import DocumentExtractor
+from .tasks import send_ocr_results
 from .utils import handle_uploaded_file
 from .settings import PAGINATE_BY
-
-
-def send_ocr_results(file_id, cb_url, token):
-    filepath = os.path.join(settings.MEDIA_ROOT, file_id)
-
-    document = DocumentExtractor(filepath)
-    total_pages = document.file.numPages
-
-    for page_dict in document:
-        page_num = page_dict['page']
-        payload = {
-            'corpus': page_dict['text'],
-            'page': page_num,
-            'is_last_page': 1 if page_num == total_pages else 0,
-            'token': token,
-        }
-        r = requests.post(cb_url, data=payload)
-        r.raise_for_status()
-    return
 
 
 class Document(APIView):
@@ -51,7 +33,7 @@ class Document(APIView):
 
         cb_url = request.POST.get('callback_url', None)
         if cb_url:
-            send_ocr_results(file_id, cb_url, request.auth.key)
+            send_ocr_results.delay(file_id, cb_url, request.auth.key)
         return Response(serializer.data,
             status=status.HTTP_201_CREATED)
 

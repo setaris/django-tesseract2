@@ -168,7 +168,9 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'kombu.transport.django',
+    'djcelery',
 )
 
 LOCAL_APPS = (
@@ -180,6 +182,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+BROKER_URL = "django://"
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

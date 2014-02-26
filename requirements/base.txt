@@ -8,3 +8,6 @@ boto==2.17.0
 tesserwrap==0.1.3
 djangorestframework==2.3.9
 requests==2.2.1
+celery==3.0.24
+kombu==2.5.16
+django-celery==3.0.23
